@@ -6,7 +6,7 @@ nixPkgs = ['php82', 'php82Packages.composer', 'php82Extensions.redis']
 
 [phases.install]
 cmds = [
-  'cd backend && mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views storage/framework/cache storage/logs',
+  'cd backend && mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views storage/framework/cache storage/logs resources/views',
   'cd backend && chmod -R 775 bootstrap/cache storage',
   'cd backend && composer update --no-dev --optimize-autoloader --no-interaction'
 ]
@@ -15,7 +15,7 @@ cmds = [
 cmds = [
   'cd backend && php artisan config:cache',
   'cd backend && php artisan route:cache', 
-  'cd backend && php artisan view:cache',
+  'cd backend && [ -d "resources/views" ] && php artisan view:cache || echo "Skipping view:cache - no views directory"',
   'cd backend && php artisan storage:link'
 ]
 
