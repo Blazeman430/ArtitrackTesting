@@ -5,7 +5,10 @@ COMPOSER_ALLOW_SUPERUSER = '1'
 nixPkgs = ['php82', 'php82Packages.composer', 'php82Extensions.redis']
 
 [phases.install]
-cmds = ['cd backend && composer update --no-dev --optimize-autoloader --no-interaction']
+cmds = [
+  'cd backend && mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views storage/framework/cache',
+  'cd backend && composer update --no-dev --optimize-autoloader --no-interaction'
+]
 
 [phases.build]
 cmds = [
