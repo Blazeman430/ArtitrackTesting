@@ -6,8 +6,10 @@ nixPkgs = ['php82', 'php82Packages.composer', 'php82Extensions.redis']
 
 [phases.install]
 cmds = [
-  'cd backend && mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views storage/framework/cache',
-  'cd backend && composer update --no-dev --optimize-autoloader --no-interaction'
+  'cd backend && mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views storage/framework/cache storage/logs',
+  'cd backend && chmod -R 775 bootstrap/cache storage',
+  'cd backend && composer update --no-dev --optimize-autoloader --no-interaction --no-scripts',
+  'cd backend && composer dump-autoload --optimize'
 ]
 
 [phases.build]
