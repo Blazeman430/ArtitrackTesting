@@ -16,7 +16,6 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
         "league/csv": "^9.25",
-        "ext-redis": "*",
         "ext-fileinfo": "*"
     },
     "require-dev": {
