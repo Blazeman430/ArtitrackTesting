@@ -28,10 +28,7 @@ export default function Login() {
     setError("");
     setLoading(true);
     try {
-      // 1) Get CSRF cookie (sets XSRF-TOKEN + session cookie)
-      await primeCsrf();
-
-      // 2) Login (creates a stateful session)
+      // Login (CSRF protection disabled for this endpoint)
       const res = await api("/api/auth/login", {
         method: "POST",
         body: { email },

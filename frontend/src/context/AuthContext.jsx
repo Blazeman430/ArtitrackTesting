@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
 
   const refreshAuth = React.useCallback(async () => {
     try {
-        await primeCsrf();
+        // Skip CSRF cookie for cross-domain setup
         const res = await apiProbe("/api/auth/me");
         if (res.status === 200 && res.data && res.data.id) {
         setUser(res.data);
