@@ -1,0 +1,479 @@
+/* ---------- Custodian (Portfolio) ---------- */
+
+.cust-root {
+  --bg:#f3f4f6; --panel:#fff; --surface:#f8fafc;
+  --ink:#111827; --ink-muted:#6b7280;
+  --banner:#0ea5e9; --brand:#0284c7;  /* distinct from lab facilitator */
+  --ok:#16a34a; --bad:#dc2626; --warn:#d97706; --info:#2563eb;
+  --shadow:0 8px 20px rgba(17,24,39,.06); --radius:12px;
+
+  background:var(--bg);
+  color:var(--ink);
+  font:14px/1.45 system-ui, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Topbar */
+.cust-root .topbar{
+  height:64px; background:var(--banner);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 20px; color:#fff;
+  box-shadow:0 1px 0 rgba(17,24,39,.08), var(--shadow);
+}
+.cust-root .brand{font-weight:800}
+.cust-root .top-actions{display:flex; gap:8px}
+
+/* Buttons */
+.cust-root .btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:8px 12px; border-radius:10px;
+  border:1px solid #e5e7eb; background:#fff; color:#111; font-weight:800;
+  cursor:pointer; text-decoration:none; box-shadow:0 3px 10px rgba(0,0,0,.06);
+  transition:.15s;
+}
+.cust-root .btn:hover{background:#f1f5f9}
+.cust-root .btn--primary{border-color: var(--brand)}
+.cust-root .btn--ghost{background:transparent; border-color:#fff; color:#fff}
+
+/* Layout (with left sidebar) */
+.cust-root .layout{display:grid; gap:20px; padding:18px}
+.cust-root .layout--withnav{grid-template-columns:240px 1fr}
+
+/* Sidenav */
+.cust-root .sidenav{
+  background:var(--panel);
+  border:1px solid #e5e7eb;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:12px; display:grid; align-content:start; gap:10px;
+}
+.cust-root .sidenav__group{display:grid; gap:6px}
+.cust-root .sidenav__label{
+  font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--ink-muted); padding:4px 8px;
+}
+
+.cust-root .sidenav__link{
+  background:transparent; border:none; text-align:left;
+  padding:10px 10px; border-radius:10px; cursor:pointer;
+  font-weight:700; color:var(--ink);
+}
+.cust-root .sidenav__link:hover{background:var(--surface)}
+.cust-root .sidenav__link.active{background:#e0f2fe; color:#0c4a6e}
+.cust-root .sidenav__footer{font-size:12px; padding:6px 8px; margin-top:8px}
+
+/* Main content */
+.cust-root .main{display:grid; gap:18px}
+
+/* Panels */
+.cust-root .panel{
+  background:var(--panel);
+  border:1px solid #e5e7eb;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:16px;
+}
+.cust-root .panel__head{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px}
+.cust-root .panel__actions{display:flex; gap:8px}
+
+/* KPIs */
+.cust-root .kpis{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+.cust-root .kpi{
+  background:var(--surface);
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(17,24,39,.04);
+  padding:14px 16px;
+}
+.cust-root .kpi__title{font-size:12px; color:var(--ink-muted); text-transform:uppercase; letter-spacing:.02em}
+.cust-root .kpi__value{font-size:28px; font-weight:800; margin-top:6px; color:#111827}
+
+/* Tables */
+.cust-root .table{width:100%; border-collapse:collapse}
+.cust-root .table th, .cust-root .table td{padding:11px 12px; border-bottom:1px solid #e5e7eb}
+.cust-root .table th{font-size:12px; text-transform:uppercase; color:#475569; background:#f3f4f6}
+.cust-root .mono{font-family: ui-monospace, Menlo, Consolas, monospace}
+.cust-root .muted{color:var(--ink-muted)}
+
+/* Timeline */
+.cust-root .timeline{list-style:none; margin:0; padding:0; display:grid; gap:12px}
+.cust-root .timeline__title{font-weight:700}
+
+/* Dots & Pills */
+.cust-root .dot{width:12px; height:12px; border-radius:50%; display:inline-block}
+.cust-root .dot--ok{background:#16a34a}
+.cust-root .dot--info{background:#2563eb}
+
+.cust-root .pill{padding:2px 8px; border-radius:999px; font-size:12px; font-weight:700}
+.cust-root .pill--warn{background:#fef9c3; color:#92400e}
+.cust-root .pill--danger{background:#fee2e2; color:#7f1d1d}
+
+/* Forms / Grid */
+.cust-root label{display:grid; gap:6px}
+.cust-root .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+@media (max-width:640px){ .cust-root .grid-2{grid-template-columns:1fr} }
+.cust-root input, .cust-root select{
+  height:40px; padding:0 12px; border:1px solid #e5e7eb;
+  border-radius:12px; background:#fff; color:#111;
+}
+.cust-root input:focus, .cust-root select:focus{
+  outline:none; border-color:#93c5fd; box-shadow:0 0 0 3px rgba(59,130,246,.18)
+}
+
+/* Modal (shared look) */
+.cust-root .modal-overlay{position:fixed; inset:0; background:rgba(0,0,0,.35); display:grid; place-items:center; z-index:50}
+.cust-root .modal {
+  width: min(900px, 96vw);  /* was full; now responsive */
+  max-height: 92vh;         /* cap height */
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.3);
+  display: flex;            /* header, body, actions stack */
+  flex-direction: column;
+  overflow: hidden;         /* keep rounded corners while body scrolls */
+}
+.cust-root .modal__head{display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border-bottom:1px solid #eef2f7}
+.cust-root .modal__body{padding:16px; overflow:auto}
+.cust-root .modal__actions{display:flex; gap:8px; justify-content:flex-end; padding:12px 16px; border-top:1px solid #eef2f7}
+
+/* small inline thumbnail without layout changes */
+.cell-item { display: inline-flex; align-items: center; gap: 8px; }
+.cell-thumb { width: 28px; height: 28px; border-radius: 6px; object-fit: cover; border: 1px solid #e5e7eb; }
+
+.col-image { width:56px; text-align:center; }
+.col-image .cell-thumb { width:56px; height:56px; border-radius:6px; object-fit:cover; border:1px solid #e5e7eb; }
+
+/* ========== Layout tweaks ========== */
+.cust-root .layout { display:grid; gap:20px; padding:18px; }
+.cust-root .layout--withnav { grid-template-columns: 260px 1fr; }
+@media (max-width: 1100px) {
+  .cust-root .layout--withnav { grid-template-columns: 220px 1fr; }
+}
+@media (max-width: 880px) {
+  .cust-root .layout--withnav { grid-template-columns: 1fr; }
+  .cust-root .sidenav { position: sticky; top: 12px; z-index: 2; }
+}
+
+/* ========== KPIs: responsive grid ========== */
+.cust-root .kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* ========== Tables: sticky header + zebra ========== */
+.cust-root .table { width: 100%; border-collapse: collapse; }
+.cust-root .table th, .cust-root .table td { padding: 11px 12px; border-bottom: 1px solid #e5e7eb; }
+.cust-root .table th {
+  font-size: 12px; text-transform: uppercase; color: #475569;
+  background: #f3f4f6; position: sticky; top: 0; z-index: 1;
+}
+.cust-root .table tbody tr:nth-child(even) { background: #fafafa; }
+
+/* ========== Pills/Dots visibility on light bg ========== */
+.cust-root .pill { padding: 2px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+.cust-root .pill--ok    { background:#dcfce7; color:#166534; }
+.cust-root .pill--warn  { background:#fef9c3; color:#92400e; }
+.cust-root .pill--danger{ background:#fee2e2; color:#7f1d1d; }
+.cust-root .pill--info  { background:#dbeafe; color:#1e40af; }
+
+/* ========== Buttons focus & compact small ========== */
+.cust-root .btn:focus-visible { outline: 2px solid #93c5fd; outline-offset: 2px; }
+.cust-root .btn.btn--small { padding: 6px 10px; }
+
+/* ========== Modal: fix “too big” + scrolling ========== */
+.cust-root .modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.35);
+  display: grid; place-items: center; z-index: 50;
+}
+.cust-root .modal {
+  width: min(760px, 96vw);           /* down from full width */
+  max-height: 92vh;                  /* never overflow screen */
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.2);
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* header / scroll body / actions */
+}
+.cust-root .modal__head,
+.cust-root .modal__actions { padding: 14px 16px; display:flex; align-items:center; gap:8px; }
+.cust-root .modal__head h3 { margin: 0; }
+.cust-root .modal__body {
+  padding: 0 16px 16px 16px;
+  overflow: auto;                    /* scroll the body only */
+}
+@media (max-width: 520px) {
+  .cust-root .modal { width: 96vw; border-radius: 10px; }
+}
+
+/* ========== Sidenav readability ========== */
+.cust-root .sidenav {
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
+  box-shadow: var(--shadow, 0 8px 20px rgba(17,24,39,.06));
+  padding: 12px; display: grid; align-content: start; gap: 10px;
+}
+.cust-root .sidenav__link {
+  padding: 10px; border-radius: 10px; font-weight: 700; color: #111827;
+}
+.cust-root .sidenav__link:hover { background: #f8fafc; }
+.cust-root .sidenav__link.active { background: #e0f2fe; color: #0c4a6e; }
+.cust-root .sidenav__label { font-size: 11px; text-transform: uppercase; color:#6b7280; padding: 4px 8px; }
+
+/* ===== Profile dropdown (scoped) ===== */
+.cust-root .profile { position: relative; }
+.cust-root .profile__btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.6);
+  padding: 6px 10px; border-radius: 999px; cursor: pointer;
+}
+.cust-root .profile__btn:hover { background: rgba(255,255,255,.1); }
+.cust-root .profile__name { font-weight: 700; white-space: nowrap; }
+.cust-root .profile__avatar {
+  width: 28px; height: 28px; border-radius: 999px; overflow: hidden; flex: 0 0 auto;
+  background: #0ea5e9; display: grid; place-items: center; color: #fff; font-weight: 800;
+  border: 1px solid rgba(255,255,255,.5);
+}
+.cust-root .profile__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.cust-root .profile__avatar--lg { width: 44px; height: 44px; border: 1px solid #e5e7eb; }
+.cust-root .profile__avatar-fallback { font-size: 14px; }
+
+.cust-root .profile__chev {
+  width: 8px; height: 8px; border-right: 2px solid #fff; border-bottom: 2px solid #fff;
+  transform: rotate(45deg); margin-left: 2px; transition: transform .15s ease;
+  opacity: .9;
+}
+.cust-root .profile__chev.open { transform: rotate(-135deg); }
+
+.cust-root .profile__menu {
+  position: absolute; right: 0; top: calc(100% + 8px); z-index: 5;
+  min-width: 260px;
+}
+.cust-root .profile__card {
+  background: #111827; color: #e5e7eb; border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; box-shadow: 0 12px 28px rgba(0,0,0,.25);
+  overflow: hidden;
+}
+.cust-root .profile__id { display: flex; gap: 10px; padding: 12px; align-items: center; }
+.cust-root .profile__meta-name { font-weight: 800; }
+.cust-root .profile__meta-email { font-size: 12px; opacity: .8; }
+.cust-root .profile__meta-acct { font-size: 12px; margin-top: 2px; opacity: .9; }
+.cust-root .profile__links { display: grid; }
+.cust-root .profile__item {
+  text-align: left; background: transparent; color: inherit; border: none;
+  padding: 10px 12px; cursor: pointer;
+}
+.cust-root .profile__item:hover { background: rgba(255,255,255,.06); }
+.cust-root .profile__sep { border: none; border-top: 1px solid rgba(255,255,255,.08); margin: 4px 0; }
+.cust-root .profile__logout { color: #fecaca; }
+.cust-root .profile__logout:hover { background: rgba(220,38,38,.18); }
+
+/* ==== Custodian: AddItemModal typeahead ==== */
+.cust-root .cust-suggest {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px);
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(17,24,39,.10);
+  max-height: 260px; overflow: auto; z-index: 30;
+}
+.cust-root .cust-suggest__row {
+  display: grid; grid-template-columns: 44px 1fr auto;
+  align-items: center; gap: 10px;
+  width: 100%; padding: 10px 12px; border: 0; background: #fff;
+  text-align: left; cursor: pointer;
+}
+.cust-root .cust-suggest__row + .cust-suggest__row { border-top: 1px solid #f3f4f6; }
+.cust-root .cust-suggest__row:hover,
+.cust-root .cust-suggest__row[aria-selected="true"] { background: #e0f2fe; } /* matches active link */
+.cust-root .cust-suggest__thumb {
+  width: 44px; height: 44px; border-radius: 8px; overflow: hidden;
+  border: 1px solid #e5e7eb; background: #f3f4f6; display: grid; place-items: center;
+}
+.cust-root .cust-suggest__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.cust-root .cust-suggest__name { font-weight: 800; line-height: 1.1; }
+.cust-root .cust-suggest__meta { font-size: 12px; color: var(--ink-muted); }
+.cust-root .cust-suggest__pill {
+  font-size: 12px; font-weight: 700; color: #0c4a6e; background: #e0f2fe;
+  padding: 2px 8px; border-radius: 999px;
+}
+.cust-root .cust-suggest__empty { padding: 12px; color: var(--ink-muted); }
+
+/* Typeahead thumbs: never exceed 44x44 */
+.inv-root .ai-suggest__row .thumb,
+.cust-root .cust-suggest__thumb {
+  width: 44px; height: 44px; border-radius: 8px;
+  overflow: hidden; border: 1px solid #e5e7eb;
+}
+.inv-root .ai-suggest__row .thumb img,
+.cust-root .cust-suggest__thumb img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+}
+
+/* Modal preview: fixed box, image contained */
+.inv-root .thumb--xl,
+.cust-root .thumb--xl {
+  width: 72px; height: 72px; border-radius: 10px; overflow: hidden;
+  border: 1px solid #e5e7eb; background: #f3f4f6;
+}
+.inv-root .thumb--xl img,
+.cust-root .thumb--xl img {
+  display: block; width: 100%; height: 100%; object-fit: cover;
+}
+
+/* ===== Custodian Items Table — canonical styles (keep ONE copy only) ===== */
+
+.cust-root .table-wrap{
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;    /* << hide x overflow (no width growth) */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable both-edges;
+}
+
+/* Optional: thin scrollbar look (safe to remove if you prefer default) */
+.cust-root .table-wrap::-webkit-scrollbar{ height: 10px; }
+.cust-root .table-wrap::-webkit-scrollbar-thumb{ background: #c7ced9; border-radius: 6px; }
+.cust-root .table-wrap::-webkit-scrollbar-track{ background: transparent; }
+
+/* The table itself */
+.cust-root .table{
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: center;
+  table-layout: fixed;   /* use col widths, truncate/ wrap as needed */
+  width: 100%;           /* << fixed to container */
+  min-width: 0;          /* allow shrink in grid/flex parents */
+  background: #fff;
+}
+
+/* Sticky header row (optional; remove if you don't want it) */
+.cust-root .table thead th{
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f8fafc;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Cells */
+.cust-root .table th,
+.cust-root .table td{
+  padding: 10px 12px;
+  border-bottom: 1px solid #eef2f7;
+  vertical-align: middle;
+  overflow: hidden;              /* enables ellipsis with nowrap */
+  text-overflow: ellipsis;
+  white-space: nowrap;           /* default: one line */
+}
+
+/* Allow wrapping only for “long text” columns (opt-in by adding this class) */
+.cust-root .table td.cell--wrap,
+.cust-root .table th.cell--wrap{
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Column widths – make sure your JSX <colgroup> uses these classes */
+.cust-root col.col-image { width: 10%; }        /* thumbnail */
+.cust-root col.col-sku   { width: 10%; }
+.cust-root col.col-item  { width: 10%; }       /* name/description */
+.cust-root col.col-num   { width: 10%;}       /* numeric cols (on hand, min, etc.) */
+.cust-root col.col-date  { width: 10%; }
+.cust-root col.col-act   { width: 10%; }       /* actions */
+
+/* If you have a final “fill” column, let it flex a bit */
+.cust-root col.col-flex  { width: 320px; }
+
+/* Row hover */
+.cust-root .table tbody tr:hover td{
+  background: #f9fbfe;
+}
+
+/* Compact mode helper (optional) */
+.cust-root .table.table--compact th,
+.cust-root .table.table--compact td{
+  padding: 6px 10px;
+}
+
+/* ===== Anti-overflow patch: let grid/flex items shrink ===== */
+
+/* The grid column that holds main content must be allowed to shrink */
+.cust-root .layout--withnav > * { min-width: 0; }
+
+/* Panels and table wrapper must also be allowed to shrink inside grid/flex */
+.cust-root .main,
+.cust-root .panel,
+.cust-root .table-wrap { min-width: 0; }
+
+/* Keep the rounded panel edge, but let the inner scroller handle overflow */
+.cust-root .panel { overflow: hidden; }
+
+/* (Optional) If your main/content containers are flex, make sure they don't cause page-wide scrollbars */
+.cust-root .content,
+.cust-root .main { overflow-x: hidden; }
+
+/* ================================
+   Collapsible sidebar for custodian
+   ================================ */
+
+/* Align brand + toggle on the left */
+.cust-root .topbar { display:flex; align-items:center; justify-content:space-between; }
+.cust-root .topbar-left { display:flex; align-items:center; gap:10px; }
+
+/* Toggle button */
+.cust-root .nav-toggle {
+  border-color: rgba(255,255,255,.5);
+  color: #000000;
+  height: 32px;
+  padding: 0 10px;
+}
+.cust-root .nav-toggle:hover { background: rgba(255,255,255,.08); }
+
+/* Smooth width feel */
+.cust-root .sidenav { transition: padding .18s ease; }
+.cust-root .sidenav__link { display:flex; align-items:center; gap:10px; }
+.cust-root .sidenav__label { transition: opacity .18s ease; }
+.cust-root .layout--withnav { transition: grid-template-columns .18s ease; }
+
+/* Icon/text spans (safe even if missing) */
+.cust-root .sidenav .nav-icon { display:inline-block; width: 1.2em; text-align:center; }
+.cust-root .sidenav .nav-text { display:inline-block; }
+
+/* --- Collapsed state --- */
+.cust-root.nav--collapsed .layout--withnav { grid-template-columns: 72px 1fr; } /* was 240/260px */
+@media (max-width: 880px) {
+  /* On small screens we already stack; ignore collapse */
+  .cust-root.nav--collapsed .layout--withnav { grid-template-columns: 1fr; }
+}
+
+.cust-root.nav--collapsed .sidenav {
+  padding: 8px;            /* tighter padding */
+}
+
+.cust-root.nav--collapsed .sidenav__label,
+.cust-root.nav--collapsed .sidenav__footer {
+  display: none;           /* hide section labels & footer */
+}
+
+.cust-root.nav--collapsed .sidenav__link {
+  justify-content: center; /* center icons/short labels */
+  padding: 10px 8px;
+}
+
+/* Hide long text when collapsed */
+.cust-root.nav--collapsed .sidenav .nav-text { display: none; }
+
+/* Departments: show short code (HTM/PE/SCI/ICT) when collapsed */
+.cust-root.nav--collapsed .sidenav__link[data-short]::before {
+  content: attr(data-short);
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+/* Keep active/hover visuals consistent in collapsed mode */
+.cust-root.nav--collapsed .sidenav__link.active { background:#e0f2fe; color:#0c4a6e; }
+.cust-root.nav--collapsed .sidenav__link:hover  { background:#f8fafc; }
+
+/* Let the main column actually gain the freed space and avoid overflow */
+.cust-root.nav--collapsed .layout--withnav > * { min-width: 0; }
+

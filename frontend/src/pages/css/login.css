@@ -1,0 +1,172 @@
+/* ---------- Login (scoped) ---------- */
+.login-root {
+  /* Theme tokens (scoped to login only) */
+  --bg:#0e1117;
+  --panel:#ffffff;
+  --ink:#0b1220;
+  --muted:#6b7280;
+  --brand:#0e6bff;
+  --banner:#0b5cc2;
+  --ring:rgba(14,107,255,.25);
+  --shadow:0 18px 40px rgba(0,0,0,.25);
+  --radius:18px;
+
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b5cc2 0%, #0e1117 60%);
+  color: var(--ink);
+  font: 14px/1.45 system-ui, Segoe UI, Roboto, Arial, sans-serif;
+
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+/* Card */
+.login-root .login-card {
+  width: 460px;
+  max-width: 94vw;
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+/* Headings & subtext */
+.login-root .brand { font-weight: 900; color: var(--banner); letter-spacing: .02em; }
+.login-root h1 { margin: 8px 0 0; }
+.login-root .muted { color: var(--muted); margin: 6px 0 16px; }
+
+/* Form */
+.login-root .form { display: grid; gap: 12px; }
+.login-root label { display: grid; gap: 6px; }
+.login-root input {
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  color: #111;
+  font-weight: 500;
+}
+.login-root input::placeholder { color: #9ca3af; }
+.login-root input:focus {
+  outline: none;
+  border-color: #bcd3ff;
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* Password wrapper */
+.login-root .pw { position: relative; }
+
+/* Actions row (Login / Clear) */
+.login-root .actions { display: flex; gap: 8px; }
+
+/* Buttons */
+.login-root .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 800;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #111;
+  cursor: pointer;
+  transition: .15s ease;
+}
+.login-root .btn--primary {
+  background: var(--brand);
+  color: #fff;
+  border-color: var(--brand);
+  box-shadow: 0 4px 12px rgba(14,107,255,.35);
+}
+.login-root .btn--primary:hover { filter: brightness(0.95); }
+.login-root .btn--ghost {
+  background: transparent;
+  color: #facc15;            /* STI yellow for contrast */
+  border-color: #facc15;
+}
+.login-root .btn--ghost:hover { background: rgba(250,204,21,.12); }
+
+/* Microsoft button */
+.login-root .btn--m365 {
+  width: 100%;
+  margin: 8px 0 0;
+  gap: 10px;
+  background: #fff;
+  color: #111;
+  border-color: #d1d5db;
+  box-shadow: 0 3px 10px rgba(0,0,0,.1);
+}
+.login-root .btn--m365:hover {
+  background: #f9fafb;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.15);
+}
+.login-root .ms-logo {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+}
+
+/* Divider */
+.login-root .divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0 12px;
+  color: #374151;
+}
+.login-root .divider::before,
+.login-root .divider::after {
+  content: "";
+  height: 1px;
+  background: #e5e7eb;
+  flex: 1;
+}
+
+/* Test user chips */
+.login-root .grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+@media (max-width: 520px) {
+  .login-root .grid-2 { grid-template-columns: 1fr; }
+}
+.login-root .chip {
+  border: none;
+  background: #eef2ff;
+  color: #1d3b7a;
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 800;
+  transition: .15s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+}
+.login-root .chip:hover { background: #e0e7ff; transform: translateY(-1px); }
+.login-root .chip--outline {
+  background: #fff;
+  border: 1px solid #d1d5db;
+  color: #0b1220;
+  box-shadow: none;
+}
+.login-root .chip--highlight {
+  background: #fef08a;
+  color: #111;
+}
+
+/* Error + hint */
+.login-root .error {
+  background: #fee2e2;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+.login-root .hint { margin-top: 12px; color: #374151; font-size: 12px; }
+.login-root .hint p { margin: 2px 0; }
