@@ -2,7 +2,7 @@
 nixPkgs = ['php82', 'php82Packages.composer']
 
 [phases.install]
-cmds = ['cd backend && composer install --no-dev --optimize-autoloader']
+cmds = ['cd backend && composer update --no-dev --optimize-autoloader --no-interaction']
 
 [phases.build]
 cmds = [
