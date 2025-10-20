@@ -19,8 +19,13 @@ This guide will walk you through deploying your Laravel backend to Railway and y
 3. Select **"Deploy from GitHub repo"**
 4. Authorize Railway to access your GitHub account
 5. Select your repository: `ArtitrackTesting`
-6. **IMPORTANT**: Railway will detect the monorepo structure with `railway.json` and `nixpacks.toml` at the root
-7. The configuration automatically points to the `backend/` directory
+6. **IMPORTANT - CRITICAL STEP**: 
+   - After Railway creates the service, it will fail initially (this is expected)
+   - Click on your backend service
+   - Go to **"Settings"** tab
+   - Scroll to **"Root Directory"**
+   - Enter: `backend`
+   - Railway will automatically redeploy with the correct directory
 
 ### Step 2: Add PostgreSQL Database
 
