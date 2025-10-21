@@ -50,5 +50,12 @@ RUN php artisan route:cache
 # Expose port 80
 EXPOSE 80
 
-# Start Apache on the PORT environment variable (required by Render)
-CMD ["sh", "-c", "PORT=${PORT:-80} && sed -i \"s/Listen 80/Listen $PORT/g\" /etc/apache2/ports.conf && sed -i \"s/:80/:$PORT/g\" /etc/apache2/sites-available/000-default.conf && apache2-foreground"]
+# Create startup script to handle dynamic port
+RUN echo '#!/bin/bash\n\
+PORT=${PORT:-80}\n\
+echo "Listen $PORT" > /etc/apache2/ports.conf\n\
+sed -i "s/<VirtualHost \\*:80>/<VirtualHost *:$PORT>/g" /etc/apache2/sites-available/000-default.conf\n\
+exec apache2-foreground' > /start.sh && chmod +x /start.sh
+
+# Start Apache with dynamic port configuration
+CMD ["/start.sh"]
