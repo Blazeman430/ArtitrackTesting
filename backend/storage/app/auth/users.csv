@@ -1,0 +1,7 @@
+email,name,role,dept,account_no,photo_url,is_active
+mejia.22834@munoz.sti.edu.ph,Maria Mejia,admin,ICT,22834,,1
+test@sti.edu.ph,Test User,custodian,ICT,12345,,1
+admin@sti.edu.ph,Admin User,admin,ICT,00001,,1
+custodian@sti.edu.ph,Custodian User,custodian,HTM,00002,,1
+borrower@sti.edu.ph,Borrower User,borrower,PE,00003,,1
+labfaci@sti.edu.ph,Lab Facilitator,lab_faci,SCI,00004,,1
