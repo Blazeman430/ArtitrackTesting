@@ -6,6 +6,9 @@ return [
     // Explicit allow-list for production. FRONTEND_URL can be set to your primary site.
     'allowed_origins' => array_filter([
         env('FRONTEND_URL'),
+        // Railway backend domains
+        'https://artitracktesting-production.up.railway.app',
+        'https://artitracktesting-proxy.up.railway.app',
         // Local development (optional)
         'http://localhost:3000',
         'http://127.0.0.1:3000',
