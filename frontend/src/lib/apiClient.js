@@ -67,13 +67,19 @@ export async function api(
         ? url.includes("/api/auth/me")
         : false;
     if (res.status === 401 && isMeEndpoint) {
-      // you can return null or a small marker object; choose one and handle it in callers
+      // Suppress console error for expected 401 on /api/auth/me
       return null; // <= means "guest"
     }
     const message = (data && data.message) || (typeof data === "string" ? data : `HTTP ${res.status}`);
     const err = new Error(message);
     err.status = res.status;
     err.data = data;
+    
+    // Only log non-401 errors to avoid cluttering console with expected auth failures
+    if (res.status !== 401) {
+      console.error(`API Error ${res.status}:`, message);
+    }
+    
     throw err;
   }
 
@@ -95,7 +101,12 @@ export async function apiProbe(path, opts = {}) {
     return { status: 200, data };
   } catch (err) {
     if (err && err.status === 401) {
+      // Suppress 401 errors for auth probes - this is expected for guest users
       return { status: 401, data: null };
+    }
+    // Only log unexpected errors
+    if (err && err.status !== 401) {
+      console.error('API Error:', err);
     }
     throw err;
   }

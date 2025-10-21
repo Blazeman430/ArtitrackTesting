@@ -13,11 +13,21 @@ export function AuthProvider({ children }) {
         const res = await apiProbe("/api/auth/me");
         if (res.status === 200 && res.data && res.data.id) {
         setUser(res.data);
-        try { localStorage.setItem("arti_user", JSON.stringify(res)); } catch {}
+        try { localStorage.setItem("arti_user", JSON.stringify(res.data)); } catch {}
         setStatus("authed");
         return res.data;
-        } 
-    } catch (_) {}
+        } else if (res.status === 401) {
+        // Expected 401 for unauthenticated users - not an error
+        setUser(null);
+        setStatus("guest");
+        return null;
+        }
+    } catch (err) {
+        // Only log unexpected errors (not 401s)
+        if (err && err.status !== 401) {
+            console.error('Auth check failed:', err);
+        }
+    }
     setUser(null);
     setStatus("guest");
     return null;
