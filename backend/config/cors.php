@@ -16,6 +16,8 @@ return [
     'allowed_origins_patterns' => [
         '/^https:\\/\\/.*\\.vercel\\.app$/',
         '/^https:\\/\\/.*\\.netlify\\.app$/',
+        '/^https:\\/\\/.*\\.railway\\.app$/',
+        '/^https:\\/\\/.*\\.up\\.railway\\.app$/',
     ],
     'allowed_headers' => ['*'],
     'exposed_headers' => [],
