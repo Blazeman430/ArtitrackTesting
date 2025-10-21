@@ -1,5 +1,5 @@
 // src/lib/apiClient.js
-export const API_BASE = process.env.REACT_APP_API_BASE || "https://artitracktesting-production.up.railway.app";
+export const API_BASE = process.env.REACT_APP_API_BASE || "https://artitracktesting.onrender.com";
 
 function buildUrl(path) {
   if (typeof path !== "string") {
