@@ -50,5 +50,5 @@ RUN php artisan route:cache
 # Expose port 80
 EXPOSE 80
 
-# Start Apache
-CMD ["apache2-foreground"]
+# Start Apache on the PORT environment variable (required by Render)
+CMD ["sh", "-c", "sed -i 's/80/$PORT/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf && apache2-foreground"]
