@@ -1,8 +1,5 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 
-Route::middleware('web')->group(function () {
-    Route::post('/api/auth/login', [AuthController::class, 'login']);
-});
+// All auth routes are now in api.php with Sanctum middleware

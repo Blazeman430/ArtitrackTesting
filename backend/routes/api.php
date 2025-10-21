@@ -14,12 +14,10 @@ use App\Http\Middleware\VerifyCsrfToken as AppCsrf;
 
 Route::get('/_ping', fn() => response()->json(['ok' => true]));
 
-Route::post('/auth/login',  [AuthController::class, 'login'])
-     ->withoutMiddleware([FrameworkCsrf::class, AppCsrf::class]);
+// Login route with Sanctum stateful middleware (handles CSRF via X-XSRF-TOKEN header)
+Route::post('/auth/login', [AuthController::class, 'login']);
      
 Route::post('/auth/reload', [AuthController::class, 'reloadCsv']);
-
-// ...existing top of file
 
 Route::middleware('auth:sanctum')->group(function () {
   // ---- Auth ----

@@ -28,7 +28,10 @@ export default function Login() {
     setError("");
     setLoading(true);
     try {
-      // Login (CSRF protection disabled for this endpoint)
+      // 1) Get CSRF cookie from Sanctum
+      await primeCsrf();
+      
+      // 2) Login with CSRF token in header
       const res = await api("/api/auth/login", {
         method: "POST",
         body: { email },
