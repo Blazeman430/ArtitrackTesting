@@ -13,6 +13,39 @@ class AuthController extends Controller
 {
     protected function csvUsers(): array
     {
+        // TEMPORARY: Hardcoded users to bypass CSV/Railway issues
+        return [
+            'mejia.22834@munoz.sti.edu.ph' => [
+                'email' => 'mejia.22834@munoz.sti.edu.ph',
+                'name' => 'Maria Mejia',
+                'role' => 'admin',
+                'dept' => 'ICT',
+                'account_no' => '22834',
+                'photo_url' => '',
+                'is_active' => true,
+            ],
+            'test@sti.edu.ph' => [
+                'email' => 'test@sti.edu.ph',
+                'name' => 'Test User',
+                'role' => 'custodian',
+                'dept' => 'ICT',
+                'account_no' => '12345',
+                'photo_url' => '',
+                'is_active' => true,
+            ],
+            'admin@sti.edu.ph' => [
+                'email' => 'admin@sti.edu.ph',
+                'name' => 'Admin User',
+                'role' => 'admin',
+                'dept' => 'ICT',
+                'account_no' => '00001',
+                'photo_url' => '',
+                'is_active' => true,
+            ],
+        ];
+        
+        // Original CSV code (commented out for debugging)
+        /*
         $path  = storage_path('app/auth/users.csv');
         if (!is_file($path)) return [];
 
@@ -39,6 +72,7 @@ class AuthController extends Controller
             }
             return $rows;
         });
+        */
     }
 
     public function login(Request $req)
