@@ -5,6 +5,8 @@ services:
     plan: free
     rootDir: backend
     dockerfilePath: ./Dockerfile
+    buildCommand: docker build -t artitrack-backend .
+    startCommand: docker run -p $PORT:80 artitrack-backend
     envVars:
       - key: APP_KEY
         value: base64:8B7mQqM2vX9pL4nR6sT1uY3wZ5aE8fG2hJ4kL7mN9pQ=
