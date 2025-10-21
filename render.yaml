@@ -3,14 +3,12 @@ services:
     name: artitrack-backend
     runtime: php
     plan: free
+    rootDir: backend
     buildCommand: |
-      cd backend
       composer install --no-dev --optimize-autoloader
       php artisan config:cache
       php artisan route:cache
-    startCommand: |
-      cd backend
-      php artisan serve --host=0.0.0.0 --port=$PORT
+    startCommand: php artisan serve --host=0.0.0.0 --port=$PORT
     envVars:
       - key: APP_KEY
         value: base64:8B7mQqM2vX9pL4nR6sT1uY3wZ5aE8fG2hJ4kL7mN9pQ=
@@ -29,5 +27,5 @@ services:
       - key: DB_CONNECTION
         value: sqlite
       - key: DB_DATABASE
-        value: /opt/render/project/src/backend/database/database.sqlite
+        value: database/database.sqlite
     healthCheckPath: /
