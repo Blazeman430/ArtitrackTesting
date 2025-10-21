@@ -15,12 +15,13 @@ return [
         'http://localhost:5173',
         'http://127.0.0.1:5173',
     ]),
-    // Allow preview deployments from Vercel and Netlify
+    // Allow preview deployments from Vercel, Netlify, and Render
     'allowed_origins_patterns' => [
         '/^https:\\/\\/.*\\.vercel\\.app$/',
         '/^https:\\/\\/.*\\.netlify\\.app$/',
         '/^https:\\/\\/.*\\.railway\\.app$/',
         '/^https:\\/\\/.*\\.up\\.railway\\.app$/',
+        '/^https:\\/\\/.*\\.onrender\\.com$/',
     ],
     'allowed_headers' => ['*'],
     'exposed_headers' => [],
