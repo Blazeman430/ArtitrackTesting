@@ -27,13 +27,15 @@ WORKDIR /var/www/html
 # Copy existing application directory contents
 COPY . .
 
+# Create required directories BEFORE composer install
+RUN mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views storage/framework/cache storage/logs
+RUN chmod -R 775 bootstrap/cache storage
+
 # Install dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Create required directories and set permissions
-RUN mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views storage/framework/cache storage/logs
+# Set proper ownership
 RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 775 bootstrap/cache storage
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
