@@ -2,13 +2,12 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "nixpacksConfigPath": "nixpacks.toml",
-    "nixpacksVersion": "1.38.0",
-    "buildTimestamp": "2025-10-21T01:58:51",
-    "watchPatterns": ["backend/**"]
+    "nixpacksConfigPath": "nixpacks.toml"
   },
   "deploy": {
     "restartPolicyType": "ON_FAILURE",
-    "restartPolicyMaxRetries": 10
+    "restartPolicyMaxRetries": 10,
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 300
   }
 }

@@ -14,9 +14,7 @@ cmds = [
 [phases.build]
 cmds = [
   'cd backend && php artisan config:cache',
-  'cd backend && php artisan route:cache', 
-  'cd backend && [ -d "resources/views" ] && php artisan view:cache || echo "Skipping view:cache - no views directory"',
-  'cd backend && php artisan storage:link'
+  'cd backend && php artisan route:cache'
 ]
 
 [start]
