@@ -50,11 +50,21 @@ RUN php artisan route:cache
 # Expose port 80
 EXPOSE 80
 
-# Create startup script to handle dynamic port
+# Create startup script to handle dynamic port and Laravel routing
 RUN echo '#!/bin/bash\n\
 PORT=${PORT:-80}\n\
 echo "Listen $PORT" > /etc/apache2/ports.conf\n\
-sed -i "s/<VirtualHost \\*:80>/<VirtualHost *:$PORT>/g" /etc/apache2/sites-available/000-default.conf\n\
+cat > /etc/apache2/sites-available/000-default.conf << EOF\n\
+<VirtualHost *:$PORT>\n\
+    DocumentRoot /var/www/html/public\n\
+    <Directory /var/www/html/public>\n\
+        AllowOverride All\n\
+        Require all granted\n\
+    </Directory>\n\
+    ErrorLog \${APACHE_LOG_DIR}/error.log\n\
+    CustomLog \${APACHE_LOG_DIR}/access.log combined\n\
+</VirtualHost>\n\
+EOF\n\
 exec apache2-foreground' > /start.sh && chmod +x /start.sh
 
 # Start Apache with dynamic port configuration
