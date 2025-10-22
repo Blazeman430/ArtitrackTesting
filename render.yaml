@@ -11,7 +11,7 @@ services:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
-        value: false
+        value: true
       - key: SESSION_DRIVER
         value: file
       - key: CACHE_STORE
@@ -24,4 +24,6 @@ services:
         value: sqlite
       - key: DB_DATABASE
         value: database/database.sqlite
+      - key: APP_URL
+        value: https://artitracktesting.onrender.com
     healthCheckPath: /

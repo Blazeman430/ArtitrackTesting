@@ -43,9 +43,9 @@ RUN a2enmod rewrite
 # Copy Apache configuration
 COPY .htaccess /var/www/html/.htaccess
 
-# Cache Laravel configuration
-RUN php artisan config:cache
-RUN php artisan route:cache
+# Skip caching during build - will be done at runtime
+# RUN php artisan config:cache
+# RUN php artisan route:cache
 
 # Expose port 80
 EXPOSE 80
@@ -65,6 +65,9 @@ cat > /etc/apache2/sites-available/000-default.conf << EOF\n\
     CustomLog \${APACHE_LOG_DIR}/access.log combined\n\
 </VirtualHost>\n\
 EOF\n\
+cd /var/www/html\n\
+php artisan config:cache\n\
+php artisan route:cache\n\
 exec apache2-foreground' > /start.sh && chmod +x /start.sh
 
 # Start Apache with dynamic port configuration
