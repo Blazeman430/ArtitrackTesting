@@ -21,13 +21,16 @@ RUN docker-php-ext-install pdo_mysql pdo_sqlite mbstring exif pcntl bcmath gd
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+
 # Set working directory
 WORKDIR /var/www/html
 
 # Copy existing application directory contents
 COPY . .
 
-# Create required directories BEFORE composer install
+# Create required directories
 RUN mkdir -p bootstrap/cache storage/framework/sessions storage/framework/views storage/framework/cache storage/logs
 RUN chmod -R 775 bootstrap/cache storage
 
@@ -37,38 +40,19 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 # Set proper ownership
 RUN chown -R www-data:www-data /var/www/html
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
-
-# Copy Apache configuration
-COPY .htaccess /var/www/html/.htaccess
-
-# Skip caching during build - will be done at runtime
-# RUN php artisan config:cache
-# RUN php artisan route:cache
-
-# Expose port 80
-EXPOSE 80
-
-# Create startup script to handle dynamic port and Laravel routing
-RUN echo '#!/bin/bash\n\
-PORT=${PORT:-80}\n\
-echo "Listen $PORT" > /etc/apache2/ports.conf\n\
-cat > /etc/apache2/sites-available/000-default.conf << EOF\n\
-<VirtualHost *:$PORT>\n\
+# Configure Apache for Laravel
+RUN echo '<VirtualHost *:80>\n\
     DocumentRoot /var/www/html/public\n\
     <Directory /var/www/html/public>\n\
         AllowOverride All\n\
         Require all granted\n\
     </Directory>\n\
-    ErrorLog \${APACHE_LOG_DIR}/error.log\n\
-    CustomLog \${APACHE_LOG_DIR}/access.log combined\n\
-</VirtualHost>\n\
-EOF\n\
-cd /var/www/html\n\
-php artisan config:cache\n\
-php artisan route:cache\n\
-exec apache2-foreground' > /start.sh && chmod +x /start.sh
+    ErrorLog ${APACHE_LOG_DIR}/error.log\n\
+    CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
+</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
-# Start Apache with dynamic port configuration
-CMD ["/start.sh"]
+# Expose port 80
+EXPOSE 80
+
+# Start Apache
+CMD ["apache2-foreground"]
